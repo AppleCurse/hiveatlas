@@ -1,3 +1,4 @@
+import Fuse from 'fuse.js';
 export type Tool = {
   id: string;
   slug: string;
@@ -1136,19 +1137,19 @@ export function getAlternatives(slug: string, limit = 5): Tool[] {
     .slice(0, limit);
 }
 
+
 export function searchTools(query: string): Tool[] {
   if (!query || query.trim() === '') return tools;
-  
+
   // 1. Türkçe karakter ve noktalama normalizasyonu
   const normalize = (str: string) => str.toLowerCase()
     .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
     .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c')
     .replace(/[^a-z0-9\s]/g, '');
 
-  const qRaw = query.toLowerCase().trim();
   const qNorm = normalize(query);
   const qWords = qNorm.split(/\s+/).filter(w => w.length > 1);
-  
+
   // 2. Eşanlamlı Kelimeler Sözlüğü (Synonyms)
   const synonyms: Record<string, string[]> = {
     'ai': ['yapay zeka', 'yapayzeka'],
@@ -1163,7 +1164,7 @@ export function searchTools(query: string): Tool[] {
     '3d': ['model', 'ucboyutlu'],
     'cevir': ['translation', 'ceviri', 'tercume', 'altyazi'],
   };
-  
+
   // Sorgudaki kelimelerin eşanlamlılarını bul
   let expandedTerms = [...qWords];
   qWords.forEach(word => {
@@ -1173,49 +1174,52 @@ export function searchTools(query: string): Tool[] {
       }
     });
   });
-  
+
   // Benzersiz arama terimleri (tekrarları temizle)
   expandedTerms = Array.from(new Set(expandedTerms));
+  const expandedQuery = expandedTerms.join(' ');
 
-  // 3. Skorlama (Scoring) Motoru
-  const results = tools.map(tool => {
-    let score = 0;
-    const nameNorm = normalize(tool.name);
-    const tagNorm = normalize(tool.tagline);
-    const isFree = tool.pricingModel === 'free' || tool.pricingModel === 'open_source' || tool.hasFreeTier;
-    
-    // "bedava", "ücretsiz" gibi kelimeler varsa ve tool ücretsizse ekstra puan
+  // 3. Fuse.js ile Fuzzy Search
+  // Prepare data with normalized fields for better matching
+  const fuseData = tools.map(tool => ({
+    ...tool,
+    normalizedName: normalize(tool.name),
+    normalizedTagline: normalize(tool.tagline),
+    normalizedCategories: tool.categories.map(c => normalize(c)),
+    normalizedUseCases: tool.useCases.map(u => normalize(u)),
+  }));
+
+  const fuse = new Fuse(fuseData, {
+    keys: [
+      { name: 'normalizedName', weight: 0.5 },
+      { name: 'normalizedCategories', weight: 0.2 },
+      { name: 'normalizedUseCases', weight: 0.2 },
+      { name: 'normalizedTagline', weight: 0.1 }
+    ],
+    threshold: 0.4, // Lower threshold = more strict, higher = more fuzzy
+    ignoreLocation: true,
+    includeScore: true
+  });
+
+  const fuseResults = fuse.search(expandedQuery);
+
+  // Extract tools and apply custom boosting
+  const results = fuseResults.map(result => {
+    const item = result.item;
+    let score = (1 - (result.score || 0)) * 100; // Invert score so higher is better
+
+    const isFree = item.pricingModel === 'free' || item.pricingModel === 'open_source' || item.hasFreeTier;
     if ((expandedTerms.includes('free') || expandedTerms.includes('ucretsiz')) && isFree) {
       score += 40;
     }
 
-    expandedTerms.forEach(term => {
-      // 3.1. İsim Eşleşmeleri (En yüksek puan)
-      if (nameNorm === term) score += 100;
-      else if (nameNorm.startsWith(term)) score += 80;
-      else if (nameNorm.includes(term)) score += 60;
-      
-      // Typo/Fuzzy mantığı: Aranan harfler sırasıyla geçiyorsa (örn: "mdj" -> "midjourney", "chatgpt" -> "cet cıpıt")
-      let fuzzyIndex = 0;
-      for (let j = 0; j < nameNorm.length && fuzzyIndex < term.length; j++) {
-        if (nameNorm[j] === term[fuzzyIndex]) fuzzyIndex++;
-      }
-      if (fuzzyIndex === term.length && term.length >= 3) score += 25; // Subsequence match
-      
-      // 3.2. Açıklama (Tagline) Eşleşmesi
-      if (tagNorm.includes(term)) score += 35;
-      
-      // 3.3. Kategori ve Kullanım Alanı Eşleşmesi
-      if (tool.categories.some(c => normalize(c).includes(term))) score += 50;
-      if (tool.useCases.some(u => normalize(u).includes(term))) score += 40;
-    });
-    
+    // Original tool without normalized fields
+    const tool = tools.find(t => t.id === item.id) as Tool;
     return { tool, score };
   });
 
-  // Skorlara göre sırala ve puanı 0'dan büyük olanları döndür
+  // Sırala ve döndür
   return results
-    .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score)
-    .map(item => item.tool);
+    .map(r => r.tool);
 }

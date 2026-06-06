@@ -44,7 +44,7 @@ export default function SearchResultsClient() {
       {q && (
         <div style={{ marginBottom: 20 }}>
           <h1 style={{ fontSize: 22, fontFamily: "'DM Serif Display', serif", color: 'var(--text)', marginBottom: 4 }}>
-            "{q}"
+            &quot;{q}&quot;
           </h1>
           <p style={{ fontSize: 13, color: 'var(--muted)' }}>
             {results.length} sonuç bulundu — MatchScore sıralamasıyla
