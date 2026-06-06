@@ -191,7 +191,7 @@ export default function WizardPage() {
                 style={{
                   display: 'flex', alignItems: 'center', gap: 14, textAlign: 'left',
                   padding: '14px 18px', borderRadius: 12,
-                  border: '1px solid var(--border)', background: 'white',
+                  border: '1px solid var(--border)', background: 'var(--card-bg)',
                   cursor: 'pointer', transition: 'all 0.15s',
                   fontFamily: "'DM Sans', sans-serif",
                 }}
@@ -202,7 +202,7 @@ export default function WizardPage() {
                 }}
                 onMouseLeave={e => {
                   (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-                  (e.currentTarget as HTMLElement).style.background = 'white';
+                  (e.currentTarget as HTMLElement).style.background = 'var(--card-bg)';
                   (e.currentTarget as HTMLElement).style.transform = 'none';
                 }}
               >
@@ -215,7 +215,7 @@ export default function WizardPage() {
             ))}
           </div>
 
-          {step > 1 && (
+          {typeof step === 'number' && step > 1 && (
             <button
               onClick={() => setStep((step as number - 1) as Step)}
               style={{ marginTop: 20, background: 'none', border: 'none', fontSize: 13, color: 'var(--subtle)', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}

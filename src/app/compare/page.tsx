@@ -102,7 +102,7 @@ export default function ComparePage() {
             Seçilenler ({selected.length}/{MAX_COMPARE}):
           </span>
           {selected.map(t => (
-            <span key={t.slug} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'white', border: '0.5px solid var(--accent-border)', borderRadius: 8, padding: '4px 10px', fontSize: 13 }}>
+            <span key={t.slug} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--card-bg)', border: '0.5px solid var(--accent-border)', borderRadius: 8, padding: '4px 10px', fontSize: 13 }}>
               {t.icon} {t.name}
               <button onClick={() => toggle(t)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: 14, lineHeight: 1 }}>×</button>
             </span>

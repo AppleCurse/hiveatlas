@@ -642,6 +642,438 @@ export const tools: Tool[] = [
     privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
     monthlyCostUsd: 0, matchScore: 82,
   },
+  // ─── AI ROUTER & AGGREGATOR ────────────────────────────────────────────────
+  {
+    id: '44', slug: 'openrouter', name: 'OpenRouter', icon: '🔀',
+    tagline: '300+ AI modeline tek API. Geliştiriciler için model yönlendirici.',
+    website: 'https://openrouter.ai',
+    categories: ['router','chatbot'], useCases: ['coding','writing','research'],
+    targetUsers: ['developer','startup'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'weekly',
+    wrapperDepthScore: 70, trustScore: 85, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 88,
+  },
+  {
+    id: '45', slug: 'poe', name: 'Poe', icon: '💎',
+    tagline: 'Quora\'nun çoklu model platformu. 100+ AI modeli tek yerde.',
+    website: 'https://poe.com',
+    categories: ['router','chatbot'], useCases: ['writing','research','coding'],
+    targetUsers: ['normal','creator'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'weekly',
+    wrapperDepthScore: 45, trustScore: 75, affiliateRisk: false,
+    privacyScore: 'low', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 78, trustWarnings: ['Veriler Quora sunucularında saklanır'],
+  },
+  {
+    id: '46', slug: 'typingmind', name: 'TypingMind', icon: '⌨️',
+    tagline: 'Kendi API anahtarınla çalışan AI arayüzü. BYOK — tam kontrol sende.',
+    website: 'https://www.typingmind.com',
+    categories: ['router','chatbot'], useCases: ['writing','coding','research'],
+    targetUsers: ['developer','creator'],
+    pricingModel: 'paid', hasFreeTier: false, startingPriceUsd: 39,
+    apiAvailable: false, selfHostable: true, localRun: false, dockerSupport: false, ollamaSupport: true,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'weekly',
+    wrapperDepthScore: 60, trustScore: 82, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 80,
+  },
+  {
+    id: '47', slug: 'litellm', name: 'LiteLLM', icon: '🔌',
+    tagline: 'Açık kaynak AI model yönlendirici. 100+ modele tek API gateway.',
+    website: 'https://litellm.ai',
+    categories: ['router','automation'], useCases: ['coding','automation'],
+    targetUsers: ['developer','startup','enterprise'],
+    pricingModel: 'open_source', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: true, localRun: true, dockerSupport: true, ollamaSupport: true,
+    openSource: true, githubUrl: 'https://github.com/BerriAI/litellm', githubStars: 16000,
+    licenseType: 'MIT', ossHealthScore: 90, commitFrequency: 'daily',
+    wrapperDepthScore: 75, trustScore: 88, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 85,
+  },
+  // ─── YEREL LLM ─────────────────────────────────────────────────────────────
+  {
+    id: '48', slug: 'lm-studio', name: 'LM Studio', icon: '🖥️',
+    tagline: 'En kolay yerel LLM arayüzü. İndir, çalıştır, konuş — internet yok.',
+    website: 'https://lmstudio.ai',
+    categories: ['chatbot'], useCases: ['writing','coding','research'],
+    targetUsers: ['normal','developer','creator'],
+    pricingModel: 'free', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: false, localRun: true, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'weekly',
+    wrapperDepthScore: 80, trustScore: 88, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 90,
+  },
+  {
+    id: '49', slug: 'gpt4all', name: 'GPT4All', icon: '🤖',
+    tagline: 'Açık kaynak yerel chatbot. Düşük donanımda bile çalışır.',
+    website: 'https://gpt4all.io',
+    categories: ['chatbot'], useCases: ['writing','research'],
+    targetUsers: ['normal','developer'],
+    pricingModel: 'open_source', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: false, localRun: true, dockerSupport: false, ollamaSupport: false,
+    openSource: true, githubUrl: 'https://github.com/nomic-ai/gpt4all', githubStars: 72000,
+    licenseType: 'MIT', ossHealthScore: 85, commitFrequency: 'weekly',
+    wrapperDepthScore: 82, trustScore: 90, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 88,
+  },
+  {
+    id: '50', slug: 'msty', name: 'Msty', icon: '✨',
+    tagline: 'Şık workspace arayüzlü yerel LLM. Ollama + bulut modelleri birlikte.',
+    website: 'https://msty.app',
+    categories: ['chatbot'], useCases: ['writing','research','coding'],
+    targetUsers: ['normal','creator'],
+    pricingModel: 'free', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: false, selfHostable: false, localRun: true, dockerSupport: false, ollamaSupport: true,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'weekly',
+    wrapperDepthScore: 72, trustScore: 80, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 82,
+  },
+  {
+    id: '51', slug: 'anythingllm', name: 'AnythingLLM', icon: '📂',
+    tagline: 'Kendi dokümanlarınla konuşan AI. Yerel RAG sistemi.',
+    website: 'https://anythingllm.com',
+    categories: ['chatbot','research'], useCases: ['research','writing'],
+    targetUsers: ['developer','startup','enterprise'],
+    pricingModel: 'open_source', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: true, localRun: true, dockerSupport: true, ollamaSupport: true,
+    openSource: true, githubUrl: 'https://github.com/Mintplex-Labs/anything-llm', githubStars: 30000,
+    licenseType: 'MIT', ossHealthScore: 88, commitFrequency: 'daily',
+    wrapperDepthScore: 85, trustScore: 88, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 86,
+  },
+  {
+    id: '52', slug: 'private-gpt', name: 'PrivateGPT', icon: '🔐',
+    tagline: 'Tamamen gizli, yerel RAG. Şirket verilerin asla dışarı çıkmaz.',
+    website: 'https://privategpt.dev',
+    categories: ['chatbot','research'], useCases: ['research','writing'],
+    targetUsers: ['developer','enterprise'],
+    pricingModel: 'open_source', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: true, localRun: true, dockerSupport: true, ollamaSupport: true,
+    openSource: true, githubUrl: 'https://github.com/zylon-ai/private-gpt', githubStars: 55000,
+    licenseType: 'Apache-2.0', ossHealthScore: 85, commitFrequency: 'weekly',
+    wrapperDepthScore: 90, trustScore: 92, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 85,
+  },
+  {
+    id: '53', slug: 'localai', name: 'LocalAI', icon: '🏠',
+    tagline: 'OpenAI API uyumlu yerel motor. Drop-in replacement.',
+    website: 'https://localai.io',
+    categories: ['chatbot','automation'], useCases: ['coding','automation'],
+    targetUsers: ['developer','enterprise'],
+    pricingModel: 'open_source', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: true, localRun: true, dockerSupport: true, ollamaSupport: false,
+    openSource: true, githubUrl: 'https://github.com/mudler/LocalAI', githubStars: 28000,
+    licenseType: 'MIT', ossHealthScore: 82, commitFrequency: 'daily',
+    wrapperDepthScore: 88, trustScore: 86, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 83,
+  },
+  // ─── CODING AGENTS ─────────────────────────────────────────────────────────
+  {
+    id: '54', slug: 'windsurf', name: 'Windsurf', icon: '🏄',
+    tagline: 'AI-native IDE. Cascade agent ile otonom kod yazımı.',
+    website: 'https://codeium.com/windsurf',
+    categories: ['coding'], useCases: ['coding'],
+    targetUsers: ['developer'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'daily',
+    wrapperDepthScore: 85, trustScore: 82, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 88,
+  },
+  {
+    id: '55', slug: 'claude-code', name: 'Claude Code', icon: '🧠',
+    tagline: 'Terminal bazlı coding agent. Derin analiz ve refactoring ustası.',
+    website: 'https://docs.anthropic.com/en/docs/claude-code',
+    categories: ['coding'], useCases: ['coding'],
+    targetUsers: ['developer'],
+    pricingModel: 'paid', hasFreeTier: false, startingPriceUsd: 20,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'daily',
+    wrapperDepthScore: 95, trustScore: 90, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 20, matchScore: 90,
+  },
+  {
+    id: '56', slug: 'devin', name: 'Devin', icon: '🤖',
+    tagline: 'Otonom AI yazılım mühendisi. Planlama, kodlama, test — tek başına.',
+    website: 'https://devin.ai',
+    categories: ['coding','agent'], useCases: ['coding'],
+    targetUsers: ['developer','startup','enterprise'],
+    pricingModel: 'paid', hasFreeTier: false, startingPriceUsd: 500,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'daily',
+    wrapperDepthScore: 95, trustScore: 78, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 500, matchScore: 82,
+  },
+  {
+    id: '57', slug: 'replit-agent', name: 'Replit Agent', icon: '⚡',
+    tagline: 'Prompt\'tan deploy\'a. Bulutta anında uygulama oluştur.',
+    website: 'https://replit.com',
+    categories: ['coding','agent'], useCases: ['coding'],
+    targetUsers: ['normal','creator','developer'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'daily',
+    wrapperDepthScore: 80, trustScore: 78, affiliateRisk: false,
+    privacyScore: 'low', gdprCompliant: true, dataStored: true, trainsOnData: true,
+    monthlyCostUsd: 0, matchScore: 80,
+    trustWarnings: ['Kodunuz Replit sunucularında saklanır ve AI eğitiminde kullanılabilir'],
+  },
+  // ─── TASARIM & UI ────────────────────────────────────────────────────────
+  {
+    id: '58', slug: 'canva-ai', name: 'Canva AI', icon: '✨',
+    tagline: 'Herkes için yapay zeka destekli tasarım. Magic Studio.',
+    website: 'https://canva.com',
+    categories: ['design','image'], useCases: ['design','writing'],
+    targetUsers: ['normal','creator','startup'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 15,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 60, trustScore: 88, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: true,
+    monthlyCostUsd: 0, matchScore: 85,
+  },
+  {
+    id: '59', slug: 'figma-ai', name: 'Figma AI', icon: '🎨',
+    tagline: 'UI/UX tasarımcıları için yerleşik AI araçları.',
+    website: 'https://figma.com',
+    categories: ['design'], useCases: ['design'],
+    targetUsers: ['creator','developer','enterprise'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 15,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 70, trustScore: 90, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: true,
+    monthlyCostUsd: 0, matchScore: 88,
+  },
+  {
+    id: '60', slug: 'recraft', name: 'Recraft', icon: '📐',
+    tagline: 'Profesyonel AI vektör ve ikon üretici. Sınırsız varyasyon.',
+    website: 'https://recraft.ai',
+    categories: ['design','image'], useCases: ['design'],
+    targetUsers: ['creator','startup'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 20,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 85, trustScore: 84, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 82,
+  },
+  {
+    id: '61', slug: 'krea-ai', name: 'Krea AI', icon: '🪄',
+    tagline: 'Gerçek zamanlı görsel üretim ve upscale aracı.',
+    website: 'https://krea.ai',
+    categories: ['design','image'], useCases: ['design'],
+    targetUsers: ['creator','normal'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 30,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 80, trustScore: 82, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 84,
+  },
+  // ─── ÇEVİRİ ──────────────────────────────────────────────────────────────
+  {
+    id: '62', slug: 'deepl', name: 'DeepL', icon: '🌐',
+    tagline: 'Dünyanın en doğru AI çeviri motoru. Avrupa dillerinde rakipsiz.',
+    website: 'https://deepl.com',
+    categories: ['translation','writing'], useCases: ['writing','research'],
+    targetUsers: ['normal','startup','enterprise'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 9,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 95, trustScore: 95, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 92,
+  },
+  {
+    id: '63', slug: 'immersive-translate', name: 'Immersive Translate', icon: '🌍',
+    tagline: 'Çift dilli tarayıcı uzantısı. PDF ve YouTube videolarını anında çevir.',
+    website: 'https://immersivetranslate.com',
+    categories: ['translation'], useCases: ['research','reading'],
+    targetUsers: ['normal','creator','developer'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 8,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 80, trustScore: 88, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 86,
+  },
+  // ─── VİDEO DÜZENLEME & AVATAR ────────────────────────────────────────────
+  {
+    id: '64', slug: 'capcut-ai', name: 'CapCut AI', icon: '✂️',
+    tagline: 'Ücretsiz AI video düzenleyici. Otomatik altyazı ve efektler.',
+    website: 'https://capcut.com',
+    categories: ['video','design'], useCases: ['video'],
+    targetUsers: ['creator','normal'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 10,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 70, trustScore: 85, affiliateRisk: false,
+    privacyScore: 'low', gdprCompliant: true, dataStored: true, trainsOnData: true,
+    monthlyCostUsd: 0, matchScore: 80,
+    trustWarnings: ['ByteDance verilerinizi analiz edebilir'],
+  },
+  {
+    id: '65', slug: 'synthesia', name: 'Synthesia', icon: '🗣️',
+    tagline: 'Kurumsal kalitede AI avatar ile video üretimi.',
+    website: 'https://synthesia.io',
+    categories: ['video'], useCases: ['video','presentation'],
+    targetUsers: ['startup','enterprise'],
+    pricingModel: 'paid', hasFreeTier: false, startingPriceUsd: 22,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 90, trustScore: 92, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 84,
+  },
+  // ─── VERİMLİLİK & DİĞER AGENT'LAR ────────────────────────────────────────
+  {
+    id: '66', slug: 'raycast-ai', name: 'Raycast AI', icon: '🔍',
+    tagline: 'macOS için ışık hızında AI asistan ve başlatıcı.',
+    website: 'https://raycast.com',
+    categories: ['productivity','chatbot'], useCases: ['writing','coding'],
+    targetUsers: ['developer','creator'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 10,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 80, trustScore: 95, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 88,
+  },
+  {
+    id: '67', slug: 'pieces', name: 'Pieces', icon: '🧩',
+    tagline: 'Geliştiriciler için snippet yöneticisi ve yerel AI asistan.',
+    website: 'https://pieces.app',
+    categories: ['coding','productivity'], useCases: ['coding'],
+    targetUsers: ['developer'],
+    pricingModel: 'free', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: false, selfHostable: false, localRun: true, dockerSupport: false, ollamaSupport: true,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 85, trustScore: 88, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 85,
+  },
+  {
+    id: '68', slug: 'copilot-workspace', name: 'Copilot Workspace', icon: '🛠️',
+    tagline: 'GitHub\'ın task odaklı otonom kod geliştirme ortamı.',
+    website: 'https://copilot-workspace.githubnext.com',
+    categories: ['coding','agent'], useCases: ['coding'],
+    targetUsers: ['developer','enterprise'],
+    pricingModel: 'paid', hasFreeTier: false, startingPriceUsd: 10,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 85, trustScore: 92, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: true,
+    monthlyCostUsd: 0, matchScore: 86,
+  },
+  // ─── 3D & DİĞERLERİ ──────────────────────────────────────────────────────
+  {
+    id: '69', slug: 'tripo-ai', name: 'Tripo AI', icon: '🧊',
+    tagline: 'Metinden veya görselden saniyeler içinde 3D model üret.',
+    website: 'https://tripo3d.ai',
+    categories: ['3d','design'], useCases: ['design','video'],
+    targetUsers: ['creator','developer'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 15,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 85, trustScore: 82, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 80,
+  },
+  {
+    id: '70', slug: 'luma-ai', name: 'Luma AI', icon: '🌌',
+    tagline: 'NeRF teknolojisi ile telefonunuzdan profesyonel 3D sahneler oluşturun.',
+    website: 'https://lumalabs.ai',
+    categories: ['3d','video'], useCases: ['video','design'],
+    targetUsers: ['creator','normal'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 90, trustScore: 88, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 85,
+  },
+  {
+    id: '71', slug: 'rask-ai', name: 'Rask AI', icon: '🎙️',
+    tagline: 'Videoları dudak senkronu ile 130+ dile otomatik dublaj yapın.',
+    website: 'https://rask.ai',
+    categories: ['video','translation','audio'], useCases: ['video','translation'],
+    targetUsers: ['creator','startup'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 49,
+    apiAvailable: true, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 75, trustScore: 85, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: true,
+    monthlyCostUsd: 0, matchScore: 84,
+  },
+  {
+    id: '72', slug: 'mem', name: 'Mem', icon: '📝',
+    tagline: 'Kendiliğinden organize olan AI destekli not defteri.',
+    website: 'https://mem.ai',
+    categories: ['productivity','writing'], useCases: ['writing','research'],
+    targetUsers: ['normal','startup'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 10,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 80, trustScore: 82, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 85,
+  },
+  {
+    id: '73', slug: 'kittl', name: 'Kittl', icon: '🖋️',
+    tagline: 'Gelişmiş tipografi ve AI destekli tasarım platformu.',
+    website: 'https://kittl.com',
+    categories: ['design'], useCases: ['design'],
+    targetUsers: ['creator','startup'],
+    pricingModel: 'freemium', hasFreeTier: true, startingPriceUsd: 15,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 75, trustScore: 85, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: true,
+    monthlyCostUsd: 0, matchScore: 82,
+  },
+  {
+    id: '74', slug: 'microsoft-designer', name: 'Microsoft Designer', icon: '🖌️',
+    tagline: 'DALL-E destekli sosyal medya görseli ve tasarım oluşturucu.',
+    website: 'https://designer.microsoft.com',
+    categories: ['design','image'], useCases: ['design'],
+    targetUsers: ['normal','creator'],
+    pricingModel: 'free', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: false, selfHostable: false, localRun: false, dockerSupport: false, ollamaSupport: false,
+    openSource: false, ossHealthScore: 0, commitFrequency: 'inactive',
+    wrapperDepthScore: 65, trustScore: 90, affiliateRisk: false,
+    privacyScore: 'medium', gdprCompliant: true, dataStored: true, trainsOnData: true,
+    monthlyCostUsd: 0, matchScore: 86,
+  },
+  {
+    id: '75', slug: 'bifrost', name: 'Bifrost', icon: '🌉',
+    tagline: 'Maxim AI\'ın açık kaynaklı, yüksek performanslı AI model gateway\'i.',
+    website: 'https://getmaxim.ai',
+    categories: ['router'], useCases: ['coding','automation'],
+    targetUsers: ['developer','enterprise'],
+    pricingModel: 'open_source', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: true, localRun: true, dockerSupport: true, ollamaSupport: false,
+    openSource: true, githubUrl: 'https://github.com/maxim-ai/bifrost', githubStars: 1200,
+    licenseType: 'MIT', ossHealthScore: 85, commitFrequency: 'weekly',
+    wrapperDepthScore: 88, trustScore: 84, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 82,
+  },
 ];
 
 export const stackPresets = [
@@ -705,11 +1137,85 @@ export function getAlternatives(slug: string, limit = 5): Tool[] {
 }
 
 export function searchTools(query: string): Tool[] {
-  const q = query.toLowerCase();
-  return tools.filter(t =>
-    t.name.toLowerCase().includes(q) ||
-    t.tagline.toLowerCase().includes(q) ||
-    t.categories.some(c => c.includes(q)) ||
-    t.useCases.some(u => u.includes(q))
-  );
+  if (!query || query.trim() === '') return tools;
+  
+  // 1. Türkçe karakter ve noktalama normalizasyonu
+  const normalize = (str: string) => str.toLowerCase()
+    .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
+    .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c')
+    .replace(/[^a-z0-9\s]/g, '');
+
+  const qRaw = query.toLowerCase().trim();
+  const qNorm = normalize(query);
+  const qWords = qNorm.split(/\s+/).filter(w => w.length > 1);
+  
+  // 2. Eşanlamlı Kelimeler Sözlüğü (Synonyms)
+  const synonyms: Record<string, string[]> = {
+    'ai': ['yapay zeka', 'yapayzeka'],
+    'resim': ['image', 'gorsel', 'fotograf', 'foto', 'cizim'],
+    'video': ['animasyon', 'film', 'kurgu'],
+    'yazi': ['writing', 'yazarlik', 'metin', 'makale', 'blog', 'icerik'],
+    'kod': ['coding', 'yazilim', 'gelistirme', 'programlama', 'yazılımcı'],
+    'ses': ['audio', 'muzik', 'dublaj', 'voice', 'sarki'],
+    'sunum': ['presentation', 'slayt', 'powerpoint'],
+    'bedava': ['free', 'ucretsiz', 'parasiz'],
+    'chat': ['chatbot', 'sohbet', 'konusma'],
+    '3d': ['model', 'ucboyutlu'],
+    'cevir': ['translation', 'ceviri', 'tercume', 'altyazi'],
+  };
+  
+  // Sorgudaki kelimelerin eşanlamlılarını bul
+  let expandedTerms = [...qWords];
+  qWords.forEach(word => {
+    Object.entries(synonyms).forEach(([key, values]) => {
+      if (word === key || values.includes(word)) {
+        expandedTerms.push(key, ...values);
+      }
+    });
+  });
+  
+  // Benzersiz arama terimleri (tekrarları temizle)
+  expandedTerms = Array.from(new Set(expandedTerms));
+
+  // 3. Skorlama (Scoring) Motoru
+  const results = tools.map(tool => {
+    let score = 0;
+    const nameNorm = normalize(tool.name);
+    const tagNorm = normalize(tool.tagline);
+    const isFree = tool.pricingModel === 'free' || tool.pricingModel === 'open_source' || tool.hasFreeTier;
+    
+    // "bedava", "ücretsiz" gibi kelimeler varsa ve tool ücretsizse ekstra puan
+    if ((expandedTerms.includes('free') || expandedTerms.includes('ucretsiz')) && isFree) {
+      score += 40;
+    }
+
+    expandedTerms.forEach(term => {
+      // 3.1. İsim Eşleşmeleri (En yüksek puan)
+      if (nameNorm === term) score += 100;
+      else if (nameNorm.startsWith(term)) score += 80;
+      else if (nameNorm.includes(term)) score += 60;
+      
+      // Typo/Fuzzy mantığı: Aranan harfler sırasıyla geçiyorsa (örn: "mdj" -> "midjourney", "chatgpt" -> "cet cıpıt")
+      let fuzzyIndex = 0;
+      for (let j = 0; j < nameNorm.length && fuzzyIndex < term.length; j++) {
+        if (nameNorm[j] === term[fuzzyIndex]) fuzzyIndex++;
+      }
+      if (fuzzyIndex === term.length && term.length >= 3) score += 25; // Subsequence match
+      
+      // 3.2. Açıklama (Tagline) Eşleşmesi
+      if (tagNorm.includes(term)) score += 35;
+      
+      // 3.3. Kategori ve Kullanım Alanı Eşleşmesi
+      if (tool.categories.some(c => normalize(c).includes(term))) score += 50;
+      if (tool.useCases.some(u => normalize(u).includes(term))) score += 40;
+    });
+    
+    return { tool, score };
+  });
+
+  // Skorlara göre sırala ve puanı 0'dan büyük olanları döndür
+  return results
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map(item => item.tool);
 }

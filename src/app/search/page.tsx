@@ -3,7 +3,7 @@ import SearchResultsClient from './SearchResultsClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Arama Sonuçları — HiveAtlas',
+  title: 'Arama Sonuçları — Creative Elephant',
 };
 
 export default function SearchPage() {

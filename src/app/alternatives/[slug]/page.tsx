@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tool = tools.find(t => t.slug === slug);
   if (!tool) return {};
   return {
-    title: `${tool.name} Alternatifleri — HiveAtlas`,
+    title: `${tool.name} Alternatifleri — Creative Elephant`,
     description: `${tool.name} yerine kullanabileceğin en iyi AI araçları. MatchScore ile sıralandı.`,
   };
 }

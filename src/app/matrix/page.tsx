@@ -3,15 +3,18 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Alternative Matrix — HiveAtlas',
+  title: 'Karşılaştırma Matrisi — Creative Elephant',
   description: 'Tüm AI araçları tek tabloda karşılaştır.',
 };
 
-const CATS = ['chatbot','coding','image','audio','automation','writing'];
+const CATS = ['chatbot','coding','image','video','audio','music','automation','writing','research','presentation','education','data'];
 const CAT_LABELS: Record<string, string> = {
   chatbot: '💬 Chatbot & Asistan', coding: '⌨️ Kodlama',
-  image: '🎨 Görsel Üretim', audio: '🎙️ Ses',
+  image: '🎨 Görsel Üretim', video: '🎬 Video Üretim',
+  audio: '🎙️ Ses', music: '🎵 Müzik',
   automation: '⚡ Otomasyon', writing: '📝 Yazı & Verimlilik',
+  research: '🔍 Araştırma', presentation: '📊 Sunum',
+  education: '🎓 Eğitim', data: '📈 Veri Analizi',
 };
 
 export default function MatrixPage() {

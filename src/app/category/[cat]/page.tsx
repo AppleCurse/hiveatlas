@@ -5,12 +5,19 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 const CATEGORY_META: Record<string, { label: string; icon: string; desc: string }> = {
-  chatbot:    { label: 'Chatbot & Asistan', icon: '💬', desc: 'AI sohbet asistanları ve dil modeli arayüzleri' },
-  coding:     { label: 'Kodlama Araçları',  icon: '⌨️', desc: 'AI destekli kod yazma, tamamlama ve review araçları' },
-  image:      { label: 'Görsel Üretim',     icon: '🎨', desc: 'Metin-görsel, düzenleme ve tasarım AI araçları' },
-  audio:      { label: 'Ses Araçları',      icon: '🎙️', desc: 'Metin-konuşma, klonlama ve ses üretim araçları' },
-  automation: { label: 'Otomasyon',         icon: '⚡', desc: 'Workflow otomasyon ve entegrasyon platformları' },
-  writing:    { label: 'Yazı & Verimlilik', icon: '📝', desc: 'Not alma, yazı asistanı ve verimlilik araçları' },
+  chatbot:      { label: 'Chatbot & Asistan',   icon: '💬', desc: 'AI sohbet asistanları ve dil modeli arayüzleri' },
+  coding:       { label: 'Kodlama Araçları',    icon: '⌨️', desc: 'AI destekli kod yazma, tamamlama ve review araçları' },
+  image:        { label: 'Görsel Üretim',       icon: '🎨', desc: 'Metin-görsel, düzenleme ve tasarım AI araçları' },
+  video:        { label: 'Video Üretim',        icon: '🎬', desc: 'AI ile video oluşturma, düzenleme ve avatar üretim araçları' },
+  audio:        { label: 'Ses Araçları',        icon: '🎙️', desc: 'Metin-konuşma, klonlama ve ses üretim araçları' },
+  music:        { label: 'Müzik Üretim',        icon: '🎵', desc: 'AI ile şarkı, melodi ve müzik parçası üretim araçları' },
+  automation:   { label: 'Otomasyon',           icon: '⚡', desc: 'Workflow otomasyon ve entegrasyon platformları' },
+  writing:      { label: 'Yazı & Verimlilik',   icon: '📝', desc: 'Not alma, yazı asistanı ve verimlilik araçları' },
+  research:     { label: 'Araştırma',           icon: '🔍', desc: 'AI destekli arama, akademik araştırma ve bilgi sentezleme araçları' },
+  presentation: { label: 'Sunum',               icon: '📊', desc: 'AI ile slayt, sunum ve rapor hazırlama araçları' },
+  education:    { label: 'Eğitim',              icon: '🎓', desc: 'AI destekli öğrenme, öğretim ve eğitim asistanı araçları' },
+  data:         { label: 'Veri Analizi',        icon: '📈', desc: 'Veri görselleştirme, analiz ve AI destekli içgörü araçları' },
+  productivity: { label: 'Verimlilik',          icon: '📓', desc: 'Not alma, organizasyon ve kişisel verimlilik araçları' },
 };
 
 export async function generateStaticParams() {
@@ -21,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ cat: stri
   const { cat } = await params;
   const meta = CATEGORY_META[cat];
   if (!meta) return {};
-  return { title: `${meta.label} — HiveAtlas`, description: meta.desc };
+  return { title: `${meta.label} — Creative Elephant`, description: meta.desc };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ cat: string }> }) {
@@ -40,7 +47,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ cat: 
     <div style={{ maxWidth: 800, margin: '0 auto', padding: '40px 24px' }}>
       {/* Breadcrumb */}
       <div style={{ fontSize: 12, color: 'var(--subtle)', marginBottom: 20, display: 'flex', gap: 6 }}>
-        <Link href="/" style={{ color: 'var(--subtle)', textDecoration: 'none' }}>HiveAtlas</Link>
+        <Link href="/" style={{ color: 'var(--subtle)', textDecoration: 'none' }}>Creative Elephant</Link>
         <span>›</span>
         <span>{meta.label}</span>
       </div>

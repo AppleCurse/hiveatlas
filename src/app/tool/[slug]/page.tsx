@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tool = tools.find(t => t.slug === slug);
   if (!tool) return {};
   return {
-    title: `${tool.name} İncelemesi & Alternatifleri — HiveAtlas`,
+    title: `${tool.name} İncelemesi & Alternatifleri — Creative Elephant`,
     description: tool.tagline,
   };
 }
@@ -56,7 +56,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
 
       {/* Breadcrumb */}
       <div style={{ fontSize: 12, color: 'var(--subtle)', marginBottom: 24, display: 'flex', gap: 6, alignItems: 'center' }}>
-        <Link href="/" style={{ color: 'var(--subtle)', textDecoration: 'none' }}>HiveAtlas</Link>
+        <Link href="/" style={{ color: 'var(--subtle)', textDecoration: 'none' }}>Creative Elephant</Link>
         <span>›</span>
         <Link href={`/category/${tool.categories[0]}`} style={{ color: 'var(--subtle)', textDecoration: 'none' }}>{tool.categories[0]}</Link>
         <span>›</span>
@@ -137,7 +137,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
           <StatLine label="GDPR Uyumlu (AB veri yasası)" value={tool.gdprCompliant ? '✅ Evet, uyumlu' : '❌ Hayır, uyumlu değil'} highlight={tool.gdprCompliant} />
           <StatLine label="Veri saklanıyor mu?" value={tool.dataStored ? '⚠ Evet, verileriniz saklanır' : '✅ Hayır, verileriniz saklanmaz'} highlight={!tool.dataStored} />
           <StatLine label="Verilerinizle AI eğitiliyor mu?" value={tool.trainsOnData ? '⚠ Evet, verileriniz kullanılır' : '✅ Hayır, kullanılmaz'} highlight={!tool.trainsOnData} />
-          <StatLine label="Bağlı link riski (Affiliate)" value={tool.affiliateRisk ? '⚠ Var, taımsız öneriler olabilir' : '✅ Yok, bağımsız değerlendirme'} highlight={!tool.affiliateRisk} />
+          <StatLine label="Bağlı link riski (Affiliate)" value={tool.affiliateRisk ? '⚠ Var, tarafsız öneriler olabilir' : '✅ Yok, bağımsız değerlendirme'} highlight={!tool.affiliateRisk} />
           <div style={{ paddingTop: 12 }}>
             <PrivacyBadge score={tool.privacyScore} />
           </div>

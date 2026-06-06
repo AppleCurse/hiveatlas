@@ -82,7 +82,7 @@ export default function SearchBox({ autoFocus }: { autoFocus?: boolean }) {
       {open && results.length > 0 && (
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0, marginTop: 6,
-          background: 'white', border: '0.5px solid var(--border)',
+          background: 'var(--card-bg)', border: '0.5px solid var(--border)',
           borderRadius: 12, overflow: 'hidden',
           boxShadow: '0 8px 24px rgba(0,0,0,0.08)', zIndex: 50,
         }}>

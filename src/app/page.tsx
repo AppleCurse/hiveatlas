@@ -208,7 +208,7 @@ export default function HomePage() {
       <section style={{ maxWidth: 1100, margin: '56px auto 0', padding: '0 24px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 12 }}>
           {/* Sihirbaz */}
-          <div style={{ background: 'linear-gradient(135deg, #FDF6E8 0%, #FFF8F0 100%)', border: '1px solid var(--accent-border)', borderRadius: 20, padding: '32px 28px' }}>
+          <div style={{ background: 'linear-gradient(135deg, var(--wizard-gradient-1) 0%, var(--wizard-gradient-2) 100%)', border: '1px solid var(--accent-border)', borderRadius: 20, padding: '32px 28px' }}>
             <div style={{ fontSize: 36, marginBottom: 12 }}>🧙</div>
             <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 22, color: 'var(--text)', marginBottom: 8 }}>
               Hangi araç senin için?
@@ -221,7 +221,7 @@ export default function HomePage() {
             </Link>
           </div>
           {/* Karşılaştır */}
-          <div style={{ background: 'linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 100%)', border: '1px solid #C7D2FE', borderRadius: 20, padding: '32px 28px' }}>
+          <div style={{ background: 'linear-gradient(135deg, var(--compare-gradient-1) 0%, var(--compare-gradient-2) 100%)', border: '1px solid var(--compare-border)', borderRadius: 20, padding: '32px 28px' }}>
             <div style={{ fontSize: 36, marginBottom: 12 }}>⚖️</div>
             <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 22, color: 'var(--text)', marginBottom: 8 }}>
               Yan yana karşılaştır

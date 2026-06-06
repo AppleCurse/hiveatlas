@@ -3,7 +3,7 @@ import ToolCard from '@/components/ToolCard';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Stack Presets — HiveAtlas',
+  title: 'Hazır AI Setleri — Creative Elephant',
   description: 'Kullanıma hazır AI stack\'ler. Öğrenci, solo kurucu, YouTube creator, privacy-first ve daha fazlası.',
 };
 
