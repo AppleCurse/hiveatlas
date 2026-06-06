@@ -2,20 +2,20 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '0.5px solid var(--border)', marginTop: 80, padding: '32px 24px' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 22, height: 22, background: 'var(--text)', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>
+    <footer className="border-t border-[var(--border)] mt-20 py-8 px-6">
+      <div className="max-w-[1100px] mx-auto flex items-center justify-between flex-wrap gap-4">
+        <div className="flex items-center gap-2">
+          <div className="w-5.5 h-5.5 bg-[var(--text)] rounded-[5px] flex items-center justify-center text-[12px]">
             🐘
           </div>
-          <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: 14, color: 'var(--text)' }}>Creative Elephant</span>
-          <span style={{ fontSize: 12, color: 'var(--subtle)' }}>— 0 affiliate link. Gerçek veri.</span>
+          <span className="font-serif text-[14px] text-[var(--text)]">Creative Elephant</span>
+          <span className="text-[12px] text-[var(--subtle)]">— 0 affiliate link. Gerçek veri.</span>
         </div>
-        <div style={{ display: 'flex', gap: 20, fontSize: 12, color: 'var(--muted)' }}>
-          <Link href="/matrix" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Matrix</Link>
-          <Link href="/stacks" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Stack Presets</Link>
-          <Link href="/escape/openai" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Escape OpenAI</Link>
-          <Link href="/category/chatbot" style={{ color: 'var(--muted)', textDecoration: 'none' }}>Kategoriler</Link>
+        <div className="flex gap-5 text-[12px] text-[var(--muted)]">
+          <Link href="/matrix" className="text-[var(--muted)] no-underline hover:text-[var(--text)] transition-colors">Matrix</Link>
+          <Link href="/stacks" className="text-[var(--muted)] no-underline hover:text-[var(--text)] transition-colors">Stack Presets</Link>
+          <Link href="/escape/openai" className="text-[var(--muted)] no-underline hover:text-[var(--text)] transition-colors">Escape OpenAI</Link>
+          <Link href="/category/chatbot" className="text-[var(--muted)] no-underline hover:text-[var(--text)] transition-colors">Kategoriler</Link>
         </div>
       </div>
     </footer>

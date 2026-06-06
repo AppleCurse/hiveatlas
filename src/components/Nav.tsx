@@ -2,92 +2,72 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { escapeModes } from '@/lib/tools';
+import { useTheme } from 'next-themes';
 
 export default function Nav() {
   const [escapeOpen, setEscapeOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  // Initialize theme from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem('ce-theme') as 'light' | 'dark' | null;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initial = saved || (prefersDark ? 'dark' : 'light');
-    setTheme(initial);
-    document.documentElement.setAttribute('data-theme', initial);
+    // Avoid setting state in effect unless necessary, but we need it here to wait for client-side mounting
+    // Use requestAnimationFrame to defer it if next-themes still complains, or just disable the rule inline
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
   }, []);
 
   function toggleTheme() {
-    const next = theme === 'light' ? 'dark' : 'light';
-    setTheme(next);
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('ce-theme', next);
+    setTheme(resolvedTheme === 'light' ? 'dark' : 'light');
   }
 
-  // Close mobile menu on route change
   function closeMobile() {
     setMobileOpen(false);
     setEscapeOpen(false);
   }
 
   return (
-    <nav style={{ borderBottom: '0.5px solid var(--border)' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 56 }}>
+    <nav className="border-b border-[var(--border)] sticky top-0 z-50 backdrop-blur-md bg-[var(--nav-bg)] transition-colors duration-300">
+      <div className="max-w-[1100px] mx-auto px-6 flex items-center justify-between h-14">
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }} onClick={closeMobile}>
-          <div style={{ width: 32, height: 32, background: 'var(--text)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>
+        <Link href="/" className="flex items-center gap-2 no-underline" onClick={closeMobile}>
+          <div className="w-8 h-8 bg-[var(--text)] rounded-lg flex items-center justify-center text-lg">
             🐘
           </div>
-          <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: 16, color: 'var(--text)', letterSpacing: '-0.01em' }}>Creative Elephant</span>
+          <span className="font-serif text-base text-[var(--text)] tracking-[-0.01em]">Creative Elephant</span>
         </Link>
 
         {/* Desktop nav links */}
-        <div className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <div className="hidden md:flex items-center gap-1">
           {/* Escape Dropdown */}
-          <div style={{ position: 'relative' }}>
+          <div className="relative">
             <button
               onClick={() => setEscapeOpen(o => !o)}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 5,
-                padding: '6px 12px', borderRadius: 8,
-                border: escapeOpen ? '0.5px solid var(--border2)' : '0.5px solid transparent',
-                background: escapeOpen ? 'var(--bg2)' : 'transparent',
-                fontSize: 13, color: 'var(--muted)', cursor: 'pointer',
-                fontFamily: "'DM Sans', sans-serif", fontWeight: 500,
-                transition: 'all 0.15s',
-              }}
+              aria-expanded={escapeOpen}
+              aria-controls="escape-menu"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[13px] text-[var(--muted)] cursor-pointer font-sans font-medium transition-all duration-150 ${
+                escapeOpen ? 'border-[var(--border2)] bg-[var(--bg2)]' : 'border-transparent bg-transparent'
+              }`}
             >
-              🏴 Kaçış <span style={{ fontSize: 11, color: 'var(--subtle)', fontWeight: 400 }}>(ücretliden kurtul)</span>
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ transform: escapeOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.15s' }}>
+              🏴 Kaçış <span className="text-[11px] text-[var(--subtle)] font-normal">(ücretliden kurtul)</span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`transition-transform duration-150 ${escapeOpen ? 'rotate-180' : ''}`}>
                 <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
             {escapeOpen && (
-              <div style={{
-                position: 'absolute', top: '100%', left: 0, marginTop: 4,
-                background: 'var(--card-bg)', border: '0.5px solid var(--border)',
-                borderRadius: 12, padding: 6, minWidth: 220,
-                boxShadow: '0 8px 24px rgba(0,0,0,0.12)', zIndex: 100,
-              }}>
+              <div id="escape-menu" className="absolute top-full left-0 mt-1 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-1.5 min-w-[220px] shadow-[0_8px_24px_rgba(0,0,0,0.12)] z-[100]">
                 {escapeModes.map(e => (
                   <Link
                     key={e.id}
                     href={`/escape/${e.id}`}
                     onClick={() => setEscapeOpen(false)}
-                    style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                      padding: '9px 12px', borderRadius: 8, textDecoration: 'none',
-                      color: 'var(--text)', fontSize: 13, fontFamily: "'DM Sans', sans-serif",
-                      transition: 'background 0.1s',
-                    }}
-                    onMouseEnter={e2 => (e2.currentTarget.style.background = 'var(--bg2)')}
-                    onMouseLeave={e2 => (e2.currentTarget.style.background = 'transparent')}
+                    className="flex items-center justify-between px-3 py-2 rounded-lg no-underline text-[var(--text)] text-[13px] font-sans transition-colors duration-100 hover:bg-[var(--bg2)]"
                   >
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span className="flex items-center gap-2">
                       <span>{e.icon}</span>
-                      <span style={{ fontWeight: 500 }}>{e.name}</span>
+                      <span className="font-medium">{e.name}</span>
                     </span>
-                    <span style={{ fontSize: 11, color: 'var(--success)', fontWeight: 500 }}>
+                    <span className="text-[11px] text-[var(--success)] font-medium">
                       %{Math.round((1 - e.toCost / e.fromCost) * 100)} tasarruf
                     </span>
                   </Link>
@@ -96,46 +76,40 @@ export default function Nav() {
             )}
           </div>
 
-          <Link href="/compare" style={{ padding: '6px 12px', borderRadius: 8, fontSize: 13, color: 'var(--muted)', textDecoration: 'none', fontWeight: 500, transition: 'color 0.15s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>
+          <Link href="/compare" className="px-3 py-1.5 rounded-lg text-[13px] text-[var(--muted)] no-underline font-medium transition-colors duration-150 hover:text-[var(--text)]">
             ⚖️ Karşılaştır
           </Link>
-          <Link href="/stacks" style={{ padding: '6px 12px', borderRadius: 8, fontSize: 13, color: 'var(--muted)', textDecoration: 'none', fontWeight: 500, transition: 'color 0.15s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>
+          <Link href="/stacks" className="px-3 py-1.5 rounded-lg text-[13px] text-[var(--muted)] no-underline font-medium transition-colors duration-150 hover:text-[var(--text)]">
             Hazır Setler
           </Link>
-          <Link href="/matrix" style={{ padding: '6px 12px', borderRadius: 8, fontSize: 13, color: 'var(--muted)', textDecoration: 'none', fontWeight: 500, transition: 'color 0.15s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>
+          <Link href="/matrix" className="px-3 py-1.5 rounded-lg text-[13px] text-[var(--muted)] no-underline font-medium transition-colors duration-150 hover:text-[var(--text)]">
             Matrix
           </Link>
 
           {/* Theme toggle */}
-          <button onClick={toggleTheme} className="theme-toggle" aria-label="Tema değiştir" style={{ marginLeft: 4 }}>
-            {theme === 'light' ? '🌙' : '☀️'}
-          </button>
+          {mounted && (
+            <button onClick={toggleTheme} className="theme-toggle ml-1" aria-label="Tema değiştir">
+              {resolvedTheme === 'dark' ? '☀️' : '🌙'}
+            </button>
+          )}
 
-          <Link href="/wizard" className="btn btn-accent" style={{ marginLeft: 8, fontSize: 12, padding: '7px 14px' }}>
+          <Link href="/wizard" className="btn btn-accent ml-2 text-[12px] px-3.5 py-1.5">
             🧙 Sihirbaz
           </Link>
         </div>
 
         {/* Mobile: theme toggle + hamburger */}
-        <div className="mobile-only" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button onClick={toggleTheme} className="theme-toggle" aria-label="Tema değiştir">
-            {theme === 'light' ? '🌙' : '☀️'}
-          </button>
+        <div className="flex md:hidden items-center gap-2">
+          {mounted && (
+            <button onClick={toggleTheme} className="theme-toggle" aria-label="Tema değiştir">
+              {resolvedTheme === 'dark' ? '☀️' : '🌙'}
+            </button>
+          )}
           <button
             onClick={() => setMobileOpen(o => !o)}
-            aria-label="Menü"
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: 34, height: 34, borderRadius: 8,
-              border: '0.5px solid var(--border)', background: 'transparent',
-              cursor: 'pointer', color: 'var(--text)', fontSize: 18,
-            }}
+            aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
+            aria-expanded={mobileOpen}
+            className="flex items-center justify-center w-[34px] h-[34px] rounded-lg border border-[var(--border)] bg-transparent cursor-pointer text-[var(--text)] text-[18px]"
           >
             {mobileOpen ? '✕' : '☰'}
           </button>
@@ -144,19 +118,19 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="mobile-nav-menu">
-          <Link href="/wizard" onClick={closeMobile}>🧙 AI Sihirbazı</Link>
-          <Link href="/compare" onClick={closeMobile}>⚖️ Karşılaştır</Link>
-          <Link href="/stacks" onClick={closeMobile}>📦 Hazır Setler</Link>
-          <Link href="/matrix" onClick={closeMobile}>📊 Matrix Tablosu</Link>
-          <div style={{ height: 1, background: 'var(--border)', margin: '8px 0' }} />
-          <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--subtle)', padding: '4px 16px' }}>
+        <div className="fixed top-14 left-0 right-0 bottom-0 bg-[var(--bg)] z-[100] flex flex-col p-4 px-6 gap-1 border-t border-[var(--border)] animate-fade-in md:hidden">
+          <Link href="/wizard" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">🧙 AI Sihirbazı</Link>
+          <Link href="/compare" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">⚖️ Karşılaştır</Link>
+          <Link href="/stacks" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">📦 Hazır Setler</Link>
+          <Link href="/matrix" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">📊 Matrix Tablosu</Link>
+          <div className="h-px bg-[var(--border)] my-2" />
+          <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-[var(--subtle)] px-4 py-1">
             🏴 Escape Modları
           </p>
           {escapeModes.map(e => (
-            <Link key={e.id} href={`/escape/${e.id}`} onClick={closeMobile}>
+            <Link key={e.id} href={`/escape/${e.id}`} onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">
               <span>{e.icon} {e.name}</span>
-              <span style={{ marginLeft: 'auto', fontSize: 12, color: 'var(--success)', fontWeight: 500 }}>
+              <span className="ml-auto text-[12px] text-[var(--success)] font-medium">
                 %{Math.round((1 - e.toCost / e.fromCost) * 100)} tasarruf
               </span>
             </Link>
@@ -166,7 +140,7 @@ export default function Nav() {
 
       {/* Close dropdown on outside click */}
       {escapeOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 99 }} onClick={() => setEscapeOpen(false)} />
+        <div className="fixed inset-0 z-[99]" onClick={() => setEscapeOpen(false)} aria-hidden="true" />
       )}
     </nav>
   );

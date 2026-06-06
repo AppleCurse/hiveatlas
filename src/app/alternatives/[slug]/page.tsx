@@ -28,7 +28,7 @@ export default async function AlternativesPage({ params }: { params: Promise<{ s
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: '40px 24px' }}>
       <Link href={`/tool/${slug}`} style={{ fontSize: 13, color: 'var(--muted)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4, marginBottom: 24 }}>
-        ← {source.name}'a dön
+        ← {source.name}&apos;a dön
       </Link>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>

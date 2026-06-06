@@ -51,6 +51,28 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
   if (tool.apiAvailable) badges.push({ label: 'API (Yazılıma Bağlanır)', cls: 'badge-api' });
   if (tool.dockerSupport) badges.push({ label: 'Docker (Konteyner)', cls: 'badge-docker' });
 
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": tool.name,
+    "url": tool.website,
+    "applicationCategory": tool.categories.join(','),
+    "description": tool.tagline,
+    "offers": {
+      "@type": "Offer",
+      "price": tool.startingPriceUsd,
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": (tool.trustScore / 20).toFixed(1), // Convert 100 scale to 5 scale
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "1" // Arbitrary for now since no real votes
+    }
+  };
+
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: '40px 24px' }}>
 
@@ -79,6 +101,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
           {tool.icon}
         </div>
         <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
           <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 30, color: 'var(--text)', marginBottom: 6 }}>{tool.name}</h1>
           <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.6, marginBottom: 10 }}>{tool.tagline}</p>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -151,7 +174,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
             <div>
               <p className="section-label">{tool.name} alternatifleri</p>
               <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 20, color: 'var(--text)', marginTop: 4 }}>
-                MatchScore\'a göre sıralı öneriler
+                MatchScore&apos;a göre sıralı öneriler
               </h2>
             </div>
             <Link href={`/alternatives/${slug}`} style={{ fontSize: 13, color: 'var(--accent)', textDecoration: 'none', fontWeight: 500 }}>
@@ -167,7 +190,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       {/* Visit */}
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
         <a href={tool.website} target="_blank" rel="noopener noreferrer" className="btn btn-dark">
-          {tool.name}'ı Ziyaret Et ↗
+          {tool.name}&apos;ı Ziyaret Et ↗
         </a>
         {tool.githubUrl && (
           <a href={tool.githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">

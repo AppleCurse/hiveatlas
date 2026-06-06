@@ -19,17 +19,13 @@ export default function SearchBox({ autoFocus }: { autoFocus?: boolean }) {
   const [results, setResults] = useState<Tool[]>([]);
   const [open, setOpen] = useState(false);
   const [placeholder, setPlaceholder] = useState(PLACEHOLDERS[0]);
-  const [phIdx, setPhIdx] = useState(0);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Rotate placeholder
   useEffect(() => {
     const t = setInterval(() => {
-      setPhIdx(i => {
-        const next = (i + 1) % PLACEHOLDERS.length;
-        setPlaceholder(PLACEHOLDERS[next]);
-        return next;
-      });
+      setPlaceholder(prev => PLACEHOLDERS[(PLACEHOLDERS.indexOf(prev) + 1) % PLACEHOLDERS.length]);
     }, 3500);
     return () => clearInterval(t);
   }, []);
@@ -52,27 +48,27 @@ export default function SearchBox({ autoFocus }: { autoFocus?: boolean }) {
   }
 
   return (
-    <div style={{ position: 'relative' }}>
-      <div style={{ position: 'relative' }}>
+    <div className="relative">
+      <div className="relative">
         {/* Search icon */}
-        <svg style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)', pointerEvents: 'none' }} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg className="absolute left-[18px] top-1/2 -translate-y-1/2 text-[var(--muted)] pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
         <input
           ref={inputRef}
-          className="input"
+          className="input pl-[50px] pr-[120px] py-[17px] text-[15px]"
           autoFocus={autoFocus}
           value={query}
           onChange={e => handleChange(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleSubmit()}
           onFocus={() => query.length >= 2 && setOpen(true)}
           placeholder={placeholder}
-          style={{ padding: '17px 120px 17px 50px', fontSize: 15 }}
+          aria-label="Araç ara"
         />
         <button
           onClick={handleSubmit}
-          className="btn btn-dark"
-          style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', fontSize: 12, padding: '8px 16px' }}
+          className="btn btn-dark absolute right-2 top-1/2 -translate-y-1/2 text-[12px] px-4 py-2"
+          aria-label="Arama yap"
         >
           Bul →
         </button>
@@ -80,53 +76,38 @@ export default function SearchBox({ autoFocus }: { autoFocus?: boolean }) {
 
       {/* Dropdown suggestions */}
       {open && results.length > 0 && (
-        <div style={{
-          position: 'absolute', top: '100%', left: 0, right: 0, marginTop: 6,
-          background: 'var(--card-bg)', border: '0.5px solid var(--border)',
-          borderRadius: 12, overflow: 'hidden',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.08)', zIndex: 50,
-        }}>
+        <div className="absolute top-full left-0 right-0 mt-1.5 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.08)] z-50">
           {results.map(t => (
             <button
               key={t.slug}
               onClick={() => { router.push(`/tool/${t.slug}`); setOpen(false); }}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 12,
-                width: '100%', padding: '11px 16px', border: 'none',
-                background: 'transparent', cursor: 'pointer', textAlign: 'left',
-                borderBottom: '0.5px solid var(--border)', fontFamily: "'DM Sans', sans-serif",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'var(--bg2)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+              className="flex items-center gap-3 w-full px-4 py-3 border-none bg-transparent cursor-pointer text-left border-b border-[var(--border)] font-sans hover:bg-[var(--bg2)] transition-colors"
+              aria-label={`${t.name} detay sayfasına git`}
             >
-              <span style={{ fontSize: 20 }}>{t.icon}</span>
+              <span className="text-[20px]">{t.icon}</span>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>{t.name}</div>
-                <div style={{ fontSize: 11, color: 'var(--subtle)' }}>{t.categories.join(', ')}</div>
+                <div className="text-[13px] font-medium text-[var(--text)]">{t.name}</div>
+                <div className="text-[11px] text-[var(--subtle)]">{t.categories.join(', ')}</div>
               </div>
               {t.hasFreeTier && t.startingPriceUsd === 0 && (
-                <span className="badge badge-free" style={{ marginLeft: 'auto' }}>Ücretsiz</span>
+                <span className="badge badge-free ml-auto">Ücretsiz</span>
               )}
             </button>
           ))}
           <button
             onClick={handleSubmit}
-            style={{
-              display: 'flex', alignItems: 'center', gap: 8,
-              width: '100%', padding: '10px 16px', border: 'none',
-              background: 'var(--bg2)', cursor: 'pointer', textAlign: 'left',
-              fontSize: 12, color: 'var(--muted)', fontFamily: "'DM Sans', sans-serif",
-            }}
+            className="flex items-center gap-2 w-full px-4 py-2.5 border-none bg-[var(--bg2)] cursor-pointer text-left text-[12px] text-[var(--muted)] font-sans hover:bg-[var(--border)] transition-colors"
+            aria-label={`"${query}" için tüm sonuçları gör`}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
-            "{query}" için tüm sonuçları gör
+            &quot;{query}&quot; için tüm sonuçları gör
           </button>
         </div>
       )}
       {open && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 49 }} onClick={() => setOpen(false)} />
+        <div className="fixed inset-0 z-[49]" onClick={() => setOpen(false)} aria-hidden="true" />
       )}
     </div>
   );
