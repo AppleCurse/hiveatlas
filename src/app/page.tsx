@@ -6,7 +6,8 @@ import EscapeModesSection from '@/components/home/EscapeModesSection';
 import StackPresetsSection from '@/components/home/StackPresetsSection';
 import CategoriesSection from '@/components/home/CategoriesSection';
 import FeaturedToolsSection from '@/components/home/FeaturedToolsSection';
-import WizardCompareSection from '@/components/home/WizardCompareSection';
+import WizardCompareSection from "@/components/home/WizardCompareSection";
+import Newsletter from "@/components/Newsletter";
 
 export const metadata: Metadata = {
   title: 'Creative Elephant 🐘 — AI Dünyasının Kılavuzu',
@@ -52,6 +53,7 @@ export default function HomePage() {
       <CategoriesSection categories={CATEGORIES} />
       <FeaturedToolsSection tools={FEATURED_TOOLS} />
       <WizardCompareSection />
+      <Newsletter />
     </div>
   );
 }
