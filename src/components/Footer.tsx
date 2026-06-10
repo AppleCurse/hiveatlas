@@ -16,6 +16,7 @@ export default function Footer() {
           <Link href="/stacks" className="text-[var(--muted)] no-underline hover:text-[var(--text)] transition-colors">Stack Presets</Link>
           <Link href="/escape/openai" className="text-[var(--muted)] no-underline hover:text-[var(--text)] transition-colors">Escape OpenAI</Link>
           <Link href="/category/chatbot" className="text-[var(--muted)] no-underline hover:text-[var(--text)] transition-colors">Kategoriler</Link>
+          <Link href="/submit" className="text-[var(--muted)] no-underline hover:text-[var(--text)] transition-colors">Araç Öner</Link>
         </div>
       </div>
     </footer>
