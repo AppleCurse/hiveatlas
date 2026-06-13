@@ -64,13 +64,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       "price": tool.startingPriceUsd,
       "priceCurrency": "USD"
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": (tool.trustScore / 20).toFixed(1), // Convert 100 scale to 5 scale
-      "bestRating": "5",
-      "worstRating": "1",
-      "ratingCount": "1" // Arbitrary for now since no real votes
-    }
+
   };
 
   return (

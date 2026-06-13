@@ -74,7 +74,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const detail = ESCAPE_DETAILS[id];
   if (!detail) return {};
-  return { title: `${detail.title} — Creative Elephant`, description: detail.subtitle };
+  return {
+    title: `${detail.title} — Creative Elephant`,
+    description: detail.subtitle,
+    openGraph: {
+      images: [`/api/og?title=${encodeURIComponent(detail.title)}&desc=${encodeURIComponent(detail.subtitle)}&icon=${detail.emoji}`]
+    }
+  };
 }
 
 export default async function EscapePage({ params }: { params: Promise<{ id: string }> }) {

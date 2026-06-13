@@ -50,7 +50,7 @@ export default function SubmitToolPage() {
             <div className="text-5xl mb-4">🎉</div>
             <h3 className="font-serif text-2xl text-[var(--text)] mb-2">Önerin Alındı!</h3>
             <p className="text-[var(--muted)] text-[15px] mb-6">
-              Katkın için teşekkürler. Fil hortumu hemen aracı koklamaya başlıyor. 🐘
+              Katkın için teşekkürler. Fil hortumu hemen aracı manuel olarak incelemeye başlıyor. 🐘
             </p>
             <button
               onClick={() => setStatus('idle')}
