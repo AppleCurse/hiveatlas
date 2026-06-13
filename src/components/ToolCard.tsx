@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Tool } from '@/lib/tools';
+import { escapeModes } from '@/lib/tools';
 
 function getBadges(tool: Tool) {
   const badges: { label: string; cls: string }[] = [];
@@ -8,6 +9,14 @@ function getBadges(tool: Tool) {
   if (tool.localRun) badges.push({ label: 'İnternetsiz Çalışır', cls: 'badge-local' });
   if (tool.apiAvailable) badges.push({ label: 'API (Yazılıma Bağlanır)', cls: 'badge-api' });
   if (!tool.hasFreeTier && tool.startingPriceUsd > 0) badges.push({ label: `$${tool.startingPriceUsd}/ay`, cls: 'badge-paid' });
+  if (tool.commitFrequency && tool.commitFrequency !== 'inactive') {
+    const freqMap: Record<string, string> = {
+      daily: 'Bugün güncellendi',
+      weekly: 'Bu hafta güncellendi',
+      monthly: 'Bu ay güncellendi'
+    };
+    badges.push({ label: `⏱ ${freqMap[tool.commitFrequency] || 'Güncel'}`, cls: 'badge-oss' });
+  }
   return badges;
 }
 
@@ -69,6 +78,15 @@ export default function ToolCard({ tool, rank }: { tool: Tool; rank?: number }) 
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
               <PrivacyDot score={tool.privacyScore} />
+              {tool.escapeFrom && tool.escapeFrom.map(escapeId => {
+                const mode = escapeModes.find(e => e.id === escapeId);
+                if (!mode) return null;
+                return (
+                  <Link key={escapeId} href={`/escape/${escapeId}`} className="badge" style={{ background: 'var(--bg2)', color: 'var(--text)', border: '0.5px solid var(--border)', textDecoration: 'none' }}>
+                    🏴 {mode.name.replace('Escape ', '')}&apos;den kaçış
+                  </Link>
+                );
+              })}
               {tool.matchScore != null && (
                 <span className="score-pill">{tool.matchScore}</span>
               )}

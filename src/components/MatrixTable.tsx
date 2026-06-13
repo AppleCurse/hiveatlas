@@ -19,10 +19,10 @@ export default function MatrixTable({ tools }: { tools: Tool[] }) {
           {tools.map((tool, i) => (
             <tr
               key={tool.slug}
-              style={{ background: i % 2 === 0 ? 'white' : 'var(--bg)', borderBottom: '0.5px solid var(--border)', transition: 'background 0.1s', cursor: 'pointer' }}
+              style={{ background: i % 2 === 0 ? 'white' : 'var(--bg)', borderBottom: '0.5px solid var(--border)', transition: 'background 0.1s'}}
               onMouseEnter={e => (e.currentTarget.style.background = 'var(--bg2)')}
               onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? 'white' : 'var(--bg)')}
-              onClick={() => window.location.href = `/tool/${tool.slug}`}
+
             >
               <td style={{ padding: '10px 12px' }}>
                 <Link href={`/tool/${tool.slug}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
