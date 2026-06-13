@@ -37,6 +37,21 @@ export type Tool = {
 };
 
 export const tools: Tool[] = [
+  {
+    id: 'openclaw-ai', slug: 'openclaw', name: 'OpenClaw', icon: '🦖',
+    tagline: '2026\'nın en hızlı büyüyen self-host AI assistantı. WhatsApp/Telegram/Discord entegrasyonlu.',
+    website: 'https://github.com/openclaw/openclaw',
+    categories: ['chatbot', 'automation'], useCases: ['writing', 'coding', 'automation'],
+    targetUsers: ['developer', 'enterprise', 'normal'],
+    pricingModel: 'open_source', hasFreeTier: true, startingPriceUsd: 0,
+    apiAvailable: true, selfHostable: true, localRun: true, dockerSupport: true, ollamaSupport: true,
+    openSource: true, githubUrl: 'https://github.com/openclaw/openclaw', githubStars: 300000,
+    licenseType: 'MIT', ossHealthScore: 98, commitFrequency: 'daily',
+    wrapperDepthScore: 92, trustScore: 95, affiliateRisk: false,
+    privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
+    monthlyCostUsd: 0, matchScore: 95,
+  },
+
   // ─── VIDEO ──────────────────────────────────────────────────────────────────
   {
     id: '21', slug: 'runway', name: 'Runway', icon: '🎬',
@@ -386,7 +401,7 @@ export const tools: Tool[] = [
     targetUsers: ['developer','startup','enterprise'],
     pricingModel: 'open_source', hasFreeTier: true, startingPriceUsd: 0,
     apiAvailable: true, selfHostable: true, localRun: true, dockerSupport: true, ollamaSupport: true,
-    openSource: true, githubUrl: 'https://github.com/open-webui/open-webui', githubStars: 52000,
+    openSource: true, githubUrl: 'https://github.com/open-webui/open-webui', githubStars: 141000,
     licenseType: 'MIT', ossHealthScore: 91, commitFrequency: 'daily',
     wrapperDepthScore: 88, trustScore: 90, affiliateRisk: false,
     privacyScore: 'high', gdprCompliant: true, dataStored: false, trainsOnData: false,
