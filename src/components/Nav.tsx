@@ -85,6 +85,9 @@ export default function Nav() {
           <Link href="/matrix" className="px-3 py-1.5 rounded-lg text-[13px] text-[var(--muted)] no-underline font-medium transition-colors duration-150 hover:text-[var(--text)]">
             Matrix
           </Link>
+          <Link href="/imdat" className="px-3 py-1.5 rounded-lg text-[13px] text-[#DC2626] font-semibold transition-colors duration-150 hover:bg-[#FEF2F2] border border-transparent hover:border-[#FCA5A5] no-underline">
+            🚨 İmdat
+          </Link>
           <Link href="/submit" className="px-3 py-1.5 rounded-lg text-[13px] text-[var(--muted)] no-underline font-medium transition-colors duration-150 hover:text-[var(--text)]">
             🚀 Araç Öner
           </Link>
@@ -126,6 +129,7 @@ export default function Nav() {
           <Link href="/compare" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">⚖️ Karşılaştır</Link>
           <Link href="/stacks" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">📦 Hazır Setler</Link>
           <Link href="/matrix" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">📊 Matrix Tablosu</Link>
+          <Link href="/imdat" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-semibold text-[#DC2626] no-underline hover:bg-[#FEF2F2] transition-colors">🚨 İmdat Hortumu</Link>
           <Link href="/submit" onClick={closeMobile} className="flex items-center gap-2 px-4 py-3 rounded-[10px] text-[15px] font-medium text-[var(--text)] no-underline hover:bg-[var(--bg2)] transition-colors">🚀 Araç Öner</Link>
           <div className="h-px bg-[var(--border)] my-2" />
           <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-[var(--subtle)] px-4 py-1">

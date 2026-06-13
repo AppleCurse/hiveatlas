@@ -9,6 +9,14 @@ function getBadges(tool: Tool) {
   if (tool.localRun) badges.push({ label: 'İnternetsiz Çalışır', cls: 'badge-local' });
   if (tool.apiAvailable) badges.push({ label: 'API (Yazılıma Bağlanır)', cls: 'badge-api' });
   if (!tool.hasFreeTier && tool.startingPriceUsd > 0) badges.push({ label: `$${tool.startingPriceUsd}/ay`, cls: 'badge-paid' });
+  if (tool.commitFrequency && tool.commitFrequency !== 'inactive') {
+    const freqMap: Record<string, string> = {
+      daily: 'Bugün güncellendi',
+      weekly: 'Bu hafta güncellendi',
+      monthly: 'Bu ay güncellendi'
+    };
+    badges.push({ label: `⏱ ${freqMap[tool.commitFrequency] || 'Güncel'}`, cls: 'badge-oss' });
+  }
   return badges;
 }
 
