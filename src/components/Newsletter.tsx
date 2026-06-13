@@ -53,7 +53,7 @@ export default function Newsletter() {
         </form>
         {status === 'success' && (
           <p className="text-[13px] text-[var(--success)] mt-4 font-medium animate-fade-in">
-            Aramıza hoş geldin! İlk e-postan bu cuma yola çıkacak.
+            Aramıza hoş geldin! Bu bir MVP sürümüdür, ilk mailini manuel olarak göndereceğiz.
           </p>
         )}
       </div>

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://creativeelephant.com'; // Change to actual domain when known
+  const baseUrl = 'https://creativeelephant.com.tr'; // Change to actual domain when known
 
   return {
     rules: {

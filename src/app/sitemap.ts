@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { tools, escapeModes } from '@/lib/tools';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://creativeelephant.com'; // Change to actual domain when known
+  const baseUrl = 'https://creativeelephant.com.tr'; // Change to actual domain when known
 
   // Static routes
   const routes = [
