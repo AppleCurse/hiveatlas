@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return tools.map(t => ({ slug: t.slug }));
 }
 
