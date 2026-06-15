@@ -1,4 +1,4 @@
-import { getAlternatives, tools } from './tools.ts';
+import { getAlternatives, tools } from './tools';
 
 describe('getAlternatives', () => {
   it('should return an empty array if the tool slug is not found', () => {
