@@ -1143,10 +1143,10 @@ export const escapeModes = [
   { id: 'github', name: 'Escape GitHub Copilot', icon: '🐙', color: '#374151', fromCost: 10, toCost: 0 },
 ];
 
-export function getAlternatives(slug: string, limit = 5): Tool[] {
-  const source = tools.find(t => t.slug === slug);
+export function getAlternatives(slug: string, limit = 5, toolList = tools): Tool[] {
+  const source = toolList.find(t => t.slug === slug);
   if (!source) return [];
-  return tools
+  return toolList
     .filter(t => t.slug !== slug && t.categories.some(c => source.categories.includes(c)))
     .sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0))
     .slice(0, limit);
