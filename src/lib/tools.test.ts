@@ -1,4 +1,4 @@
-import { getAlternatives, tools } from './tools';
+import { getAlternatives, tools } from './tools.ts';
 
 describe('getAlternatives', () => {
   it('should return an empty array if the tool slug is not found', () => {
@@ -49,6 +49,5 @@ describe('getAlternatives', () => {
 
   it('should catch bugs: failing if sorting is reversed', () => {
     // This is a verification test to ensure we can break the code and have it fail
-    // In a real scenario, we'd manually check this, but here I'll just keep the tests robust.
   });
 });
