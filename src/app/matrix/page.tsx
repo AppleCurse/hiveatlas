@@ -23,22 +23,21 @@ export default function MatrixPage() {
   const ossCount   = tools.filter(t => t.openSource).length;
   const localCount = tools.filter(t => t.localRun).length;
 
-  function privacyStyle(score: string) {
-    return {
-      fontSize: 11, fontWeight: 500 as const, padding: '2px 7px', borderRadius: 5,
-      background: score === 'high' ? 'var(--success-bg)' : score === 'medium' ? 'var(--warning-bg)' : 'var(--danger-bg)',
-      color: score === 'high' ? 'var(--success)' : score === 'medium' ? 'var(--warning)' : 'var(--danger)',
-    };
+  function getPrivacyClasses(score: string) {
+    const base = "text-[11px] font-medium px-[7px] py-[2px] rounded-[5px]";
+    if (score === "high") return `${base} bg-[var(--success-bg)] text-[var(--success)]`;
+    if (score === "medium") return `${base} bg-[var(--warning-bg)] text-[var(--warning)]`;
+    return `${base} bg-[var(--danger-bg)] text-[var(--danger)]`;
   }
 
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 24px' }}>
-      <div style={{ marginBottom: 32 }}>
-        <p className="section-label" style={{ marginBottom: 8 }}>Karşılaştırma Tablosu</p>
-        <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 32, color: 'var(--text)', marginBottom: 10 }}>
+    <div className="max-w-[1100px] mx-auto px-6 py-10">
+      <div className="mb-8">
+        <p className="section-label mb-2">Karşılaştırma Tablosu</p>
+        <h1 className="font-serif text-[32px] text-[var(--text)] mb-2.5">
           Tüm yapay zeka araçları, şeffaf verilerle
         </h1>
-        <p style={{ fontSize: 15, color: 'var(--muted)', maxWidth: 520 }}>
+        <p className="text-[15px] text-[var(--muted)] max-w-[520px]">
           {tools.length} araç · {freeCount} ücretsiz · {ossCount} açık kaynak · {localCount} internetsiz çalışır
         </p>
       </div>
@@ -47,19 +46,19 @@ export default function MatrixPage() {
         const catTools = sorted.filter(t => t.categories.includes(cat));
         if (catTools.length === 0) return null;
         return (
-          <section key={cat} style={{ marginBottom: 40 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-              <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 20, color: 'var(--text)' }}>
+          <section key={cat} className="mb-10">
+            <div className="flex items-center justify-between mb-3.5">
+              <h2 className="font-serif text-xl text-[var(--text)]">
                 {CAT_LABELS[cat]}
               </h2>
-              <Link href={`/category/${cat}`} style={{ fontSize: 12, color: 'var(--accent)', textDecoration: 'none' }}>
+              <Link href={`/category/${cat}`} className="text-xs text-[var(--accent)] no-underline">
                 Kategoriye git →
               </Link>
             </div>
-            <div style={{ overflow: 'auto', borderRadius: 12, border: '0.5px solid var(--border)' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+            <div className="overflow-auto rounded-xl border-[0.5px] border-[var(--border)]">
+              <table className="w-full border-collapse text-[13px]">
                 <thead>
-                  <tr style={{ background: 'var(--bg2)' }}>
+                  <tr className="bg-[var(--bg2)]">
                     {[
                       'Araç',
                       'Ücretsiz',
@@ -70,7 +69,7 @@ export default function MatrixPage() {
                       'Güven Puanı',
                       'Eşleşme Puanı',
                     ].map(h => (
-                      <th key={h} style={{ padding: '10px 12px', textAlign: 'left', fontSize: 11, fontWeight: 500, color: 'var(--subtle)', letterSpacing: '0.05em', textTransform: 'uppercase' as const, whiteSpace: 'nowrap' as const, borderBottom: '0.5px solid var(--border)' }}>
+                      <th key={h} className="px-3 py-2.5 text-left text-[11px] font-medium text-[var(--subtle)] tracking-wider uppercase whitespace-nowrap border-b-[0.5px] border-[var(--border)]">
                         {h}
                       </th>
                     ))}
@@ -78,42 +77,42 @@ export default function MatrixPage() {
                 </thead>
                 <tbody>
                   {catTools.map((tool, i) => (
-                    <tr key={tool.slug} style={{ background: i % 2 === 0 ? 'white' : 'var(--bg)', borderBottom: '0.5px solid var(--border)' }}>
-                      <td style={{ padding: '10px 12px' }}>
-                        <Link href={`/tool/${tool.slug}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ fontSize: 16 }}>{tool.icon}</span>
-                          <span style={{ fontWeight: 500, color: 'var(--text)' }}>{tool.name}</span>
+                    <tr key={tool.slug} className={`${i % 2 === 0 ? 'bg-white' : 'bg-[var(--bg)]'} border-b-[0.5px] border-[var(--border)]`}>
+                      <td className="px-3 py-2.5">
+                        <Link href={`/tool/${tool.slug}`} className="no-underline flex items-center gap-2">
+                          <span className="text-base">{tool.icon}</span>
+                          <span className="font-medium text-[var(--text)]">{tool.name}</span>
                           {tool.trustWarnings && tool.trustWarnings.length > 0 && (
-                            <span title={tool.trustWarnings.join(' · ')} style={{ fontSize: 12 }}>⚠</span>
+                            <span title={tool.trustWarnings.join(' · ')} className="text-xs">⚠</span>
                           )}
                         </Link>
                       </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' as const }}>
+                      <td className="px-3 py-2.5 text-center">
                         {tool.hasFreeTier && tool.startingPriceUsd === 0
-                          ? <span style={{ color: 'var(--success)' }}>✓</span>
-                          : <span style={{ color: 'var(--subtle)', fontSize: 11 }}>${tool.startingPriceUsd}</span>}
+                          ? <span className="text-[var(--success)]">✓</span>
+                          : <span className="text-[var(--subtle)] text-[11px]">${tool.startingPriceUsd}</span>}
                       </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' as const }}>
-                        {tool.openSource ? <span style={{ color: 'var(--success)' }}>✓</span> : <span style={{ color: 'var(--border2)' }}>—</span>}
+                      <td className="px-3 py-2.5 text-center">
+                        {tool.openSource ? <span className="text-[var(--success)]">✓</span> : <span className="text-[var(--border2)]">—</span>}
                       </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' as const }}>
-                        {tool.localRun ? <span style={{ color: 'var(--success)' }}>✓</span> : <span style={{ color: 'var(--border2)' }}>—</span>}
+                      <td className="px-3 py-2.5 text-center">
+                        {tool.localRun ? <span className="text-[var(--success)]">✓</span> : <span className="text-[var(--border2)]">—</span>}
                       </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' as const }}>
-                        {tool.apiAvailable ? <span style={{ color: 'var(--success)' }}>✓</span> : <span style={{ color: 'var(--border2)' }}>—</span>}
+                      <td className="px-3 py-2.5 text-center">
+                        {tool.apiAvailable ? <span className="text-[var(--success)]">✓</span> : <span className="text-[var(--border2)]">—</span>}
                       </td>
-                      <td style={{ padding: '10px 12px' }}>
-                        <span style={privacyStyle(tool.privacyScore)}>
+                      <td className="px-3 py-2.5">
+                        <span className={getPrivacyClasses(tool.privacyScore)}>
                           {tool.privacyScore === 'high' ? 'Yüksek' : tool.privacyScore === 'medium' ? 'Orta' : 'Düşük'}
                         </span>
                       </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' as const, color: 'var(--muted)', fontSize: 12 }}>
+                      <td className="px-3 py-2.5 text-center text-[var(--muted)] text-xs">
                         {tool.trustScore}
                       </td>
-                      <td style={{ padding: '10px 12px' }}>
+                      <td className="px-3 py-2.5">
                         {tool.matchScore != null
-                          ? <span className="score-pill" style={{ fontSize: 12 }}>{tool.matchScore}</span>
-                          : <span style={{ color: 'var(--border2)', fontSize: 12 }}>—</span>}
+                          ? <span className="score-pill text-xs">{tool.matchScore}</span>
+                          : <span className="text-[var(--border2)] text-xs">—</span>}
                       </td>
                     </tr>
                   ))}
