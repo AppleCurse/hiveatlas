@@ -1,0 +1,13 @@
+<<<<<<< SEARCH
+export function getAlternatives(slug: string, limit = 5): Tool[] {
+  const source = tools.find(t => t.slug === slug);
+  if (!source) return [];
+  return tools
+    .filter(t => t.slug !== slug && t.categories.some(c => source.categories.includes(c)))
+=======
+export function getAlternatives(slug: string, limit = 5, toolList = tools): Tool[] {
+  const source = toolList.find(t => t.slug === slug);
+  if (!source) return [];
+  return toolList
+    .filter(t => t.slug !== slug && t.categories.some(c => source.categories.includes(c)))
+>>>>>>> REPLACE

@@ -1,0 +1,12 @@
+<<<<<<< SEARCH
+    "build/**",
+    "next-env.d.ts",
+  ]),
+]);
+=======
+    "build/**",
+    "next-env.d.ts",
+    "jest.config.js",
+  ]),
+]);
+>>>>>>> REPLACE
