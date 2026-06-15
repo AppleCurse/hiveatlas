@@ -20,7 +20,7 @@ const CATEGORY_META: Record<string, { label: string; icon: string; desc: string 
   productivity: { label: 'Verimlilik',          icon: '📓', desc: 'Not alma, organizasyon ve kişisel verimlilik araçları' },
 };
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return Object.keys(CATEGORY_META).map(cat => ({ cat }));
 }
 
