@@ -1143,6 +1143,34 @@ export const escapeModes = [
   { id: 'github', name: 'Escape GitHub Copilot', icon: '🐙', color: '#374151', fromCost: 10, toCost: 0 },
 ];
 
+// 1. Türkçe karakter ve noktalama normalizasyonu
+const normalize = (str: string) => str.toLowerCase()
+  .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
+  .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c')
+  .replace(/[^a-z0-9\s]/g, '');
+
+// 3. Fuse.js ile Fuzzy Search initialization
+// Prepare data with normalized fields for better matching once
+const fuseData = tools.map(tool => ({
+  ...tool,
+  normalizedName: normalize(tool.name),
+  normalizedTagline: normalize(tool.tagline),
+  normalizedCategories: tool.categories.map(c => normalize(c)),
+  normalizedUseCases: tool.useCases.map(u => normalize(u)),
+}));
+
+const fuse = new Fuse(fuseData, {
+  keys: [
+    { name: 'normalizedName', weight: 0.5 },
+    { name: 'normalizedCategories', weight: 0.2 },
+    { name: 'normalizedUseCases', weight: 0.2 },
+    { name: 'normalizedTagline', weight: 0.1 }
+  ],
+  threshold: 0.4, // Lower threshold = more strict, higher = more fuzzy
+  ignoreLocation: true,
+  includeScore: true
+});
+
 export function getAlternatives(slug: string, limit = 5): Tool[] {
   const source = tools.find(t => t.slug === slug);
   if (!source) return [];
@@ -1155,12 +1183,6 @@ export function getAlternatives(slug: string, limit = 5): Tool[] {
 
 export function searchTools(query: string): Tool[] {
   if (!query || query.trim() === '') return tools;
-
-  // 1. Türkçe karakter ve noktalama normalizasyonu
-  const normalize = (str: string) => str.toLowerCase()
-    .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
-    .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c')
-    .replace(/[^a-z0-9\s]/g, '');
 
   const qNorm = normalize(query);
   const qWords = qNorm.split(/\s+/).filter(w => w.length > 1);
@@ -1193,28 +1215,6 @@ export function searchTools(query: string): Tool[] {
   // Benzersiz arama terimleri (tekrarları temizle)
   expandedTerms = Array.from(new Set(expandedTerms));
   const expandedQuery = expandedTerms.join(' ');
-
-  // 3. Fuse.js ile Fuzzy Search
-  // Prepare data with normalized fields for better matching
-  const fuseData = tools.map(tool => ({
-    ...tool,
-    normalizedName: normalize(tool.name),
-    normalizedTagline: normalize(tool.tagline),
-    normalizedCategories: tool.categories.map(c => normalize(c)),
-    normalizedUseCases: tool.useCases.map(u => normalize(u)),
-  }));
-
-  const fuse = new Fuse(fuseData, {
-    keys: [
-      { name: 'normalizedName', weight: 0.5 },
-      { name: 'normalizedCategories', weight: 0.2 },
-      { name: 'normalizedUseCases', weight: 0.2 },
-      { name: 'normalizedTagline', weight: 0.1 }
-    ],
-    threshold: 0.4, // Lower threshold = more strict, higher = more fuzzy
-    ignoreLocation: true,
-    includeScore: true
-  });
 
   const fuseResults = fuse.search(expandedQuery);
 
