@@ -1,10 +1,11 @@
 import { tools, getAlternatives } from '@/lib/tools';
+import { safeJsonLd } from '@/lib/utils';
 import ToolCard from '@/components/ToolCard';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return tools.map(t => ({ slug: t.slug }));
 }
 
@@ -95,7 +96,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
           {tool.icon}
         </div>
         <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }} />
           <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 30, color: 'var(--text)', marginBottom: 6 }}>{tool.name}</h1>
           <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.6, marginBottom: 10 }}>{tool.tagline}</p>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
