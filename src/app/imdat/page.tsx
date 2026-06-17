@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { tools, getAlternatives } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ImdatPage() {
   const [selectedSlug, setSelectedSlug] = useState<string>('');
@@ -18,8 +19,8 @@ export default function ImdatPage() {
   return (
     <div className="max-w-[700px] mx-auto px-6 py-14 min-h-[70vh]">
       <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-[#FEF2F2] text-[#DC2626] rounded-2xl mb-4 text-4xl border border-[#FCA5A5] shadow-sm">
-          🚨
+        <div className="flex justify-center mb-6">
+          <Image src="/imdat-mascot.svg" alt="İmdat Hortumu Maskotu" width={160} height={256} className="drop-shadow-lg" priority />
         </div>
         <h1 className="font-serif text-[32px] md:text-[40px] text-[#DC2626] mb-3 leading-tight">
           İmdat Hortumu
