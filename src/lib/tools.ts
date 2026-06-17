@@ -1153,6 +1153,29 @@ export function getAlternatives(slug: string, limit = 5): Tool[] {
 }
 
 
+const synonyms: Record<string, string[]> = {
+  'ai': ['yapay zeka', 'yapayzeka'],
+  'resim': ['image', 'gorsel', 'fotograf', 'foto', 'cizim'],
+  'video': ['animasyon', 'film', 'kurgu'],
+  'yazi': ['writing', 'yazarlik', 'metin', 'makale', 'blog', 'icerik'],
+  'kod': ['coding', 'yazilim', 'gelistirme', 'programlama', 'yazılımcı'],
+  'ses': ['audio', 'muzik', 'dublaj', 'voice', 'sarki'],
+  'sunum': ['presentation', 'slayt', 'powerpoint'],
+  'bedava': ['free', 'ucretsiz', 'parasiz'],
+  'chat': ['chatbot', 'sohbet', 'konusma'],
+  '3d': ['model', 'ucboyutlu'],
+  'cevir': ['translation', 'ceviri', 'tercume', 'altyazi'],
+};
+
+const reverseSynonymsMap = new Map<string, string[]>();
+for (const [key, values] of Object.entries(synonyms)) {
+  const allTerms = [key, ...values];
+  reverseSynonymsMap.set(key, allTerms);
+  for (const value of values) {
+    reverseSynonymsMap.set(value, allTerms);
+  }
+}
+
 export function searchTools(query: string): Tool[] {
   if (!query || query.trim() === '') return tools;
 
@@ -1165,30 +1188,17 @@ export function searchTools(query: string): Tool[] {
   const qNorm = normalize(query);
   const qWords = qNorm.split(/\s+/).filter(w => w.length > 1);
 
-  // 2. Eşanlamlı Kelimeler Sözlüğü (Synonyms)
-  const synonyms: Record<string, string[]> = {
-    'ai': ['yapay zeka', 'yapayzeka'],
-    'resim': ['image', 'gorsel', 'fotograf', 'foto', 'cizim'],
-    'video': ['animasyon', 'film', 'kurgu'],
-    'yazi': ['writing', 'yazarlik', 'metin', 'makale', 'blog', 'icerik'],
-    'kod': ['coding', 'yazilim', 'gelistirme', 'programlama', 'yazılımcı'],
-    'ses': ['audio', 'muzik', 'dublaj', 'voice', 'sarki'],
-    'sunum': ['presentation', 'slayt', 'powerpoint'],
-    'bedava': ['free', 'ucretsiz', 'parasiz'],
-    'chat': ['chatbot', 'sohbet', 'konusma'],
-    '3d': ['model', 'ucboyutlu'],
-    'cevir': ['translation', 'ceviri', 'tercume', 'altyazi'],
-  };
+
+
 
   // Sorgudaki kelimelerin eşanlamlılarını bul
   let expandedTerms = [...qWords];
-  qWords.forEach(word => {
-    Object.entries(synonyms).forEach(([key, values]) => {
-      if (word === key || values.includes(word)) {
-        expandedTerms.push(key, ...values);
-      }
-    });
-  });
+  for (const word of qWords) {
+    const terms = reverseSynonymsMap.get(word);
+    if (terms) {
+      expandedTerms.push(...terms);
+    }
+  }
 
   // Benzersiz arama terimleri (tekrarları temizle)
   expandedTerms = Array.from(new Set(expandedTerms));
