@@ -1,4 +1,4 @@
-import { tools, getAlternatives } from '@/lib/tools';
+import { tools, getAlternatives, getToolBySlug } from '@/lib/tools';
 import { safeJsonLd } from '@/lib/utils';
 import ToolCard from '@/components/ToolCard';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const tool = tools.find(t => t.slug === slug);
+  const tool = getToolBySlug(slug);
   if (!tool) return {};
   return {
     title: `${tool.name} İncelemesi & Alternatifleri — Creative Elephant`,
@@ -40,7 +40,7 @@ function PrivacyBadge({ score }: { score: string }) {
 
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const tool = tools.find(t => t.slug === slug);
+  const tool = getToolBySlug(slug);
   if (!tool) notFound();
 
   const alternatives = getAlternatives(slug, 5);

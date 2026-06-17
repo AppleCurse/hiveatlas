@@ -1,4 +1,4 @@
-import { tools, stackPresets, escapeModes } from '@/lib/tools';
+import { tools, stackPresets, escapeModes, getToolBySlug } from '@/lib/tools';
 import type { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
 import StatsStrip from '@/components/home/StatsStrip';
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const FEATURED_TOOLS = ['open-webui', 'continue-dev', 'n8n', 'flux', 'jan'].map(
-  slug => tools.find(t => t.slug === slug)!
+  slug => getToolBySlug(slug)!
 ).filter(Boolean);
 
 const CHIPS = [
@@ -29,18 +29,25 @@ const CHIPS = [
   { label: 'AI müzik üretici', query: 'müzik' },
 ];
 
+const categoryCounts = tools.reduce((acc, tool) => {
+  tool.categories.forEach(cat => {
+    acc.set(cat, (acc.get(cat) || 0) + 1);
+  });
+  return acc;
+}, new Map<string, number>());
+
 const CATEGORIES = [
-  { slug: 'chatbot',      label: 'Chatbot',      icon: '💬', count: tools.filter(t => t.categories.includes('chatbot')).length },
-  { slug: 'coding',       label: 'Kodlama',       icon: '⌨️', count: tools.filter(t => t.categories.includes('coding')).length },
-  { slug: 'image',        label: 'Görsel',        icon: '🎨', count: tools.filter(t => t.categories.includes('image')).length },
-  { slug: 'video',        label: 'Video',         icon: '🎬', count: tools.filter(t => t.categories.includes('video')).length },
-  { slug: 'audio',        label: 'Ses / Müzik',   icon: '🎵', count: tools.filter(t => t.categories.includes('audio') || t.categories.includes('music')).length },
-  { slug: 'automation',   label: 'Otomasyon',     icon: '⚡', count: tools.filter(t => t.categories.includes('automation')).length },
-  { slug: 'writing',      label: 'Yazı',          icon: '📝', count: tools.filter(t => t.categories.includes('writing')).length },
-  { slug: 'research',     label: 'Araştırma',     icon: '🔍', count: tools.filter(t => t.categories.includes('research')).length },
-  { slug: 'presentation', label: 'Sunum',         icon: '📊', count: tools.filter(t => t.categories.includes('presentation')).length },
-  { slug: 'education',    label: 'Eğitim',        icon: '🎓', count: tools.filter(t => t.categories.includes('education')).length },
-  { slug: 'data',         label: 'Veri',          icon: '📈', count: tools.filter(t => t.categories.includes('data')).length },
+  { slug: 'chatbot',      label: 'Chatbot',      icon: '💬', count: categoryCounts.get('chatbot') || 0 },
+  { slug: 'coding',       label: 'Kodlama',       icon: '⌨️', count: categoryCounts.get('coding') || 0 },
+  { slug: 'image',        label: 'Görsel',        icon: '🎨', count: categoryCounts.get('image') || 0 },
+  { slug: 'video',        label: 'Video',         icon: '🎬', count: categoryCounts.get('video') || 0 },
+  { slug: 'audio',        label: 'Ses / Müzik',   icon: '🎵', count: (categoryCounts.get('audio') || 0) + (categoryCounts.get('music') || 0) },
+  { slug: 'automation',   label: 'Otomasyon',     icon: '⚡', count: categoryCounts.get('automation') || 0 },
+  { slug: 'writing',      label: 'Yazı',          icon: '📝', count: categoryCounts.get('writing') || 0 },
+  { slug: 'research',     label: 'Araştırma',     icon: '🔍', count: categoryCounts.get('research') || 0 },
+  { slug: 'presentation', label: 'Sunum',         icon: '📊', count: categoryCounts.get('presentation') || 0 },
+  { slug: 'education',    label: 'Eğitim',        icon: '🎓', count: categoryCounts.get('education') || 0 },
+  { slug: 'data',         label: 'Veri',          icon: '📈', count: categoryCounts.get('data') || 0 },
 ];
 
 export default function HomePage() {

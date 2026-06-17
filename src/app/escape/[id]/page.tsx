@@ -1,4 +1,4 @@
-import { tools, escapeModes } from '@/lib/tools';
+import { escapeModes, getToolBySlug } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -89,7 +89,7 @@ export default async function EscapePage({ params }: { params: Promise<{ id: str
   const escapeMode = escapeModes.find(e => e.id === id);
   if (!detail || !escapeMode) notFound();
 
-  const freeTools = detail.freeStack.map(slug => tools.find(t => t.slug === slug)!).filter(Boolean);
+  const freeTools = detail.freeStack.map(slug => getToolBySlug(slug)!).filter(Boolean);
   const totalFrom = detail.currentStack.reduce((s, c) => s + c.cost, 0);
   const savings = Math.round((1 - escapeMode.toCost / totalFrom) * 100);
 
