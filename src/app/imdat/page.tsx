@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { tools, getAlternatives } from '@/lib/tools';
+import { tools, getAlternatives, getToolBySlug } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -13,7 +13,7 @@ export default function ImdatPage() {
     setSelectedSlug(e.target.value);
   };
 
-  const selectedTool = tools.find(t => t.slug === selectedSlug);
+  const selectedTool = getToolBySlug(selectedSlug);
   const alternatives = selectedSlug ? getAlternatives(selectedSlug, 3) : [];
 
   return (

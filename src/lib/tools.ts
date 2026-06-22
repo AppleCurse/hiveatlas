@@ -1143,8 +1143,22 @@ export const escapeModes = [
   { id: 'github', name: 'Escape GitHub Copilot', icon: '🐙', color: '#374151', fromCost: 10, toCost: 0 },
 ];
 
+
+
+// Pre-build dictionaries for O(1) lookups
+const toolsBySlug = new Map<string, Tool>(tools.map(t => [t.slug, t]));
+const toolsById = new Map<string, Tool>(tools.map(t => [t.id, t]));
+
+export function getToolBySlug(slug: string): Tool | undefined {
+  return toolsBySlug.get(slug);
+}
+
+export function getToolById(id: string): Tool | undefined {
+  return toolsById.get(id);
+}
+
 export function getAlternatives(slug: string, limit = 5): Tool[] {
-  const source = tools.find(t => t.slug === slug);
+  const source = getToolBySlug(slug);
   if (!source) return [];
   return tools
     .filter(t => t.slug !== slug && t.categories.some(c => source.categories.includes(c)))
@@ -1239,7 +1253,7 @@ export function searchTools(query: string): Tool[] {
     }
 
     // Original tool without normalized fields
-    const tool = tools.find(t => t.id === item.id) as Tool;
+    const tool = getToolById(item.id) as Tool;
     return { tool, score };
   });
 

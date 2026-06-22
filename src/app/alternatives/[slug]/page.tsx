@@ -1,4 +1,4 @@
-import { tools, getAlternatives } from '@/lib/tools';
+import { tools, getAlternatives, getToolBySlug } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -10,7 +10,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const tool = tools.find(t => t.slug === slug);
+  const tool = getToolBySlug(slug);
   if (!tool) return {};
   return {
     title: `${tool.name} Alternatifleri — Creative Elephant`,
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function AlternativesPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const source = tools.find(t => t.slug === slug);
+  const source = getToolBySlug(slug);
   if (!source) notFound();
 
   const alts = getAlternatives(slug, 10);

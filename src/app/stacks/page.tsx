@@ -1,4 +1,4 @@
-import { tools, stackPresets } from '@/lib/tools';
+import { stackPresets, getToolBySlug } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
 import type { Metadata } from 'next';
 
@@ -22,7 +22,7 @@ export default function StacksPage() {
 
       {stackPresets.map(preset => {
         const presetTools = preset.tools
-          .map(slug => tools.find(t => t.slug === slug)!)
+          .map(slug => getToolBySlug(slug)!)
           .filter(Boolean);
 
         return (
